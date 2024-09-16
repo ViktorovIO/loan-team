@@ -6,11 +6,10 @@ namespace App\Domain\Loan\Validator;
 
 use App\Domain\Client\Model\Client;
 
-class TermValidator implements ValidatorInterface
+class FicoValidator implements ValidatorInterface
 {
-
     public function validate(Client $client): bool
     {
-        // TODO: Implement validate() method.
+        return $client->getFico() > 500;
     }
 }

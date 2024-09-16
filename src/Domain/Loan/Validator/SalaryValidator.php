@@ -11,6 +11,6 @@ class SalaryValidator implements ValidatorInterface
 
     public function validate(Client $client): bool
     {
-        // TODO: Implement validate() method.
+        return $client->getSalary() >= 1000.00;
     }
 }

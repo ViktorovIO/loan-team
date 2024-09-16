@@ -9,9 +9,10 @@ class Loan
     public function __construct(
         private readonly ?int $id,
         private readonly string $title,
-        private readonly string $term,
+        private readonly int $term,
         private float $percentRate,
         private float $sum,
+        private int $clientId,
     ) {}
 
     public function getId(): ?int
@@ -24,7 +25,7 @@ class Loan
         return $this->title;
     }
 
-    public function getTerm(): string
+    public function getTerm(): int
     {
         return $this->term;
     }
@@ -47,5 +48,15 @@ class Loan
     public function setSum(float $sum): void
     {
         $this->sum = $sum;
+    }
+
+    public function getClientId(): int
+    {
+        return $this->clientId;
+    }
+
+    public function setClientId(int $clientId): void
+    {
+        $this->clientId = $clientId;
     }
 }

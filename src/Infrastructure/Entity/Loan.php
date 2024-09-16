@@ -16,18 +16,26 @@ class Loan
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $term = null;
-
     #[ORM\Column]
     private ?float $percentRate = null;
 
     #[ORM\Column]
     private ?float $sum = null;
 
+    #[ORM\Column]
+    private ?int $term = null;
+
+    #[ORM\Column]
+    private ?int $clientId = null;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
     }
 
     public function getTitle(): ?string
@@ -38,18 +46,6 @@ class Loan
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getTerm(): ?string
-    {
-        return $this->term;
-    }
-
-    public function setTerm(string $term): static
-    {
-        $this->term = $term;
 
         return $this;
     }
@@ -74,6 +70,30 @@ class Loan
     public function setSum(float $sum): static
     {
         $this->sum = $sum;
+
+        return $this;
+    }
+
+    public function getTerm(): ?int
+    {
+        return $this->term;
+    }
+
+    public function setTerm(int $term): static
+    {
+        $this->term = $term;
+
+        return $this;
+    }
+
+    public function getClientId(): ?int
+    {
+        return $this->clientId;
+    }
+
+    public function setClientId(?int $clientId): static
+    {
+        $this->clientId = $clientId;
 
         return $this;
     }

@@ -33,6 +33,19 @@ services:
     App\Domain\Client\Scenario\UpdateClientScenario:
         public: true
 
+    App\Application\Loan\LoanService:
+        arguments:
+            $container: '@service_container'
+
+    App\Domain\Loan\Scenario\CheckClientScenario:
+        public: true
+
+    App\Domain\Loan\Scenario\CreateLoanScenario:
+        public: true
+
+    App\Domain\Loan\Scenario\GetLoanByIdScenario:
+        public: true
+
     # Serializers
     Symfony\Component\Serializer\Serializer:
         arguments:

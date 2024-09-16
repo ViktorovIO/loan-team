@@ -8,9 +8,8 @@ use App\Domain\Client\Model\Client;
 
 class AgeValidator implements ValidatorInterface
 {
-
     public function validate(Client $client): bool
     {
-        // TODO: Implement validate() method.
+        return $client->getAge() > 18 && $client->getAge() < 60;
     }
 }

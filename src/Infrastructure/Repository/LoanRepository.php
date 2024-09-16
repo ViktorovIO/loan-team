@@ -2,42 +2,29 @@
 
 namespace App\Infrastructure\Repository;
 
+use App\Domain\Loan\Contract\Infrastructure\LoanRepositoryInterface;
 use App\Infrastructure\Entity\Loan;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Loan>
  */
-class LoanRepository extends ServiceEntityRepository
+class LoanRepository extends ServiceEntityRepository implements LoanRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private readonly EntityManagerInterface $entityManager
+    ) {
         parent::__construct($registry, Loan::class);
     }
 
-    //    /**
-    //     * @return Loan[] Returns an array of Loan objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('l')
-    //            ->andWhere('l.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('l.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function create(Loan $loan): int
+    {
+        $this->entityManager->persist($loan);
+        $this->entityManager->flush();
 
-    //    public function findOneBySomeField($value): ?Loan
-    //    {
-    //        return $this->createQueryBuilder('l')
-    //            ->andWhere('l.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        return $loan->getId();
+    }
 }
