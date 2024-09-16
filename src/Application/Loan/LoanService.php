@@ -8,9 +8,10 @@ use App\Domain\Loan\Model\Loan;
 use App\Domain\Loan\Scenario\CheckClientScenario;
 use App\Domain\Loan\Scenario\CreateLoanScenario;
 use App\Domain\Loan\Scenario\GetLoanByIdScenario;
+use App\Domain\Notification\Contract\Loan\LoanServiceInterface as NotificationLoanServiceInterface;
 use Psr\Container\ContainerInterface;
 
-class LoanService
+class LoanService implements NotificationLoanServiceInterface
 {
     public function __construct(
         private readonly ContainerInterface $container,

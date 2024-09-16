@@ -10,11 +10,12 @@ use App\Domain\Client\Scenario\CreateClientScenario;
 use App\Domain\Client\Scenario\GetClientByIdScenario;
 use App\Domain\Client\Scenario\UpdateClientScenario;
 use App\Domain\Loan\Contract\Client\ClientServiceInterface as LoanClientServiceInterface;
+use App\Domain\Notification\Contract\Client\ClientServiceInterface as NotificationClientServiceInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class ClientService implements LoanClientServiceInterface
+class ClientService implements LoanClientServiceInterface, NotificationClientServiceInterface
 {
     public function __construct(
         private readonly ContainerInterface $container,

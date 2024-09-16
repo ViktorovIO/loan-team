@@ -6,7 +6,9 @@ namespace App\Domain\Loan\Scenario;
 
 use App\Domain\Loan\Contract\Client\ClientServiceInterface;
 use App\Domain\Loan\Contract\Infrastructure\LoanRepositoryInterface;
+use App\Domain\Loan\Contract\Notification\NotificationServiceInterface;
 use App\Domain\Loan\Enum\BaseRateEnum;
+use App\Domain\Notification\Enum\NotificationTypeEnum;
 use App\Infrastructure\Entity\Loan;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -16,6 +18,7 @@ class CreateLoanScenario
     public function __construct(
         private readonly LoanRepositoryInterface $loanRepository,
         private readonly ClientServiceInterface $clientService,
+        private readonly NotificationServiceInterface $notificationService,
         private readonly LoggerInterface $logger,
     ) {}
 
@@ -34,6 +37,8 @@ class CreateLoanScenario
             $loan->setClientId($clientId);
 
             $loanId = $this->loanRepository->create($loan);
+
+            $this->notificationService->notify($loanId, $clientId, NotificationTypeEnum::Email->name);
         } catch (Throwable $e) {
             $this->logger->info(sprintf('CreateLoanScenario error: %s', $e->getMessage()));
             return null;

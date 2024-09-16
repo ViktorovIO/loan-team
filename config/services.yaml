@@ -24,6 +24,14 @@ services:
         arguments:
             $container: '@service_container'
 
+    App\Application\Notification\NotificationService:
+        arguments:
+            $container: '@service_container'
+
+    App\Application\Loan\LoanService:
+        arguments:
+            $container: '@service_container'
+
     App\Domain\Client\Scenario\CreateClientScenario:
         public: true
 
@@ -33,10 +41,6 @@ services:
     App\Domain\Client\Scenario\UpdateClientScenario:
         public: true
 
-    App\Application\Loan\LoanService:
-        arguments:
-            $container: '@service_container'
-
     App\Domain\Loan\Scenario\CheckClientScenario:
         public: true
 
@@ -44,6 +48,9 @@ services:
         public: true
 
     App\Domain\Loan\Scenario\GetLoanByIdScenario:
+        public: true
+
+    App\Domain\Notification\Scenario\NotifyLoanCreatedScenario:
         public: true
 
     # Serializers
