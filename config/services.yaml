@@ -17,8 +17,39 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Entity/'
+            - '../src/Infrastructure/Entity/'
             - '../src/Kernel.php'
+
+    App\Application\Client\ClientService:
+        arguments:
+            $container: '@service_container'
+
+    App\Domain\Client\Scenario\CreateClientScenario:
+        public: true
+
+    App\Domain\Client\Scenario\GetClientByIdScenario:
+        public: true
+
+    App\Domain\Client\Scenario\UpdateClientScenario:
+        public: true
+
+    # Serializers
+    Symfony\Component\Serializer\Serializer:
+        arguments:
+            - [ '@serializer.normalizer.object', '@serializer.normalizer.dateinterval', '@serializer.normalizer.data_uri', '@serializer.normalizer.datetime', '@serializer.normalizer.problem', '@serializer.normalizer.uid', '@serializer.normalizer.form_error' ]
+            - [ '@serializer.encoder.json' ]
+
+    Symfony\Component\Serializer\Normalizer\ObjectNormalizer:
+        tags:
+            - { name: 'serializer.normalizer' }
+
+    Symfony\Component\Serializer\Normalizer\ArrayDenormalizer:
+        tags:
+            - { name: 'serializer.normalizer' }
+
+    Symfony\Component\Serializer\Encoder\JsonEncoder:
+        tags:
+            - { name: 'serializer.encoder' }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
