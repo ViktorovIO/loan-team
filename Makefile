@@ -44,3 +44,10 @@ new-migration:
 
 migrate:
 	${DOCKER_COMPOSE} exec -u www-data php-fpm php bin/console d:m:m
+
+#########
+# TESTS #
+#########
+
+phpunit-tests:
+	docker compose exec -u www-data php-fpm php bin/phpunit

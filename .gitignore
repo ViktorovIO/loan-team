@@ -10,3 +10,8 @@
 ###< symfony/framework-bundle ###
 /docker/mysql/data
 /.idea
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
